@@ -9,7 +9,7 @@
 import Foundation
 
 // change this to false if you want to calculate the result for part2.
-var part1 = true
+var part1 = false
 
 func InitializeDictionary() -> [Character: Int] {
     var array = [Character: Int]();
@@ -58,17 +58,10 @@ var result = String()
 
 for i in 0...7 {
     let dict = keyArray[i]
-    
-    var currentChar = String()
-    var currentThreshold = part1 ? 0 : Int.max
-    for kvp in dict {
-        if part1 ? currentThreshold < kvp.value : currentThreshold > kvp.value {
-            currentThreshold = kvp.value
-            currentChar = String(kvp.key)
-        }
-    }
-    
-    result.append(currentChar)
+    var maxItem = dict.first { $0.value == (part1 ? dict.values.max() : dict.values.min()) }
+    result.append(maxItem!.key)
 }
 
 print(result)
+
+// end of file
